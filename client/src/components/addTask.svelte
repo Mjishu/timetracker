@@ -1,7 +1,7 @@
 <script>
-	import { isModalOpen } from '../shared';
+	import { isModalOpen, addTaskDatabase } from '../shared';
 	let newTask = $state({
-		task: '',
+		title: '',
 		time: '',
 		date: '',
 		type: ''
@@ -29,18 +29,19 @@
 	/**
 	 * @param {{ preventDefault: () => void; }} e
 	 */
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 		console.log($state.snapshot(newTask));
 		isModalOpen.set(false);
+		await addTaskDatabase(newTask);
 	}
 </script>
 
 {#if $isModalOpen}
 	<div class="modal">
 		<form class="modal-content" onsubmit={handleSubmit}>
-			<label for="time">Task</label>
-			<input type="text" bind:value={newTask.task} id="task" />
+			<label for="title">Title</label>
+			<input type="text" bind:value={newTask.title} id="title" />
 
 			<label for="task">Time</label>
 			<input type="text" bind:value={newTask.time} id="time" />
