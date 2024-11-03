@@ -23,3 +23,17 @@
 /root/coding/projects/javascript/fullstack_apps/timetracker/server/obj/Debug/net8.0/server.pdb
 /root/coding/projects/javascript/fullstack_apps/timetracker/server/obj/Debug/net8.0/server.genruntimeconfig.cache
 /root/coding/projects/javascript/fullstack_apps/timetracker/server/obj/Debug/net8.0/ref/server.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.Extensions.Logging.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/obj/Debug/net8.0/server.csproj.AssemblyReference.cache
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/obj/Debug/net8.0/server.sourcelink.json
+/root/coding/projects/javascript/fullstack_apps/timetracker/server/obj/Debug/net8.0/server.csproj.Up2Date
