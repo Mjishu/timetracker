@@ -5,3 +5,7 @@ export type TaskInformation = {
     date: string;
     type: string;
 }
+
+export type AggregatedTime = {
+    [key: string]: number; // key is the type, value is the total time in minutes
+};

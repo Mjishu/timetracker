@@ -1,5 +1,6 @@
 <script>
-	import { isModalOpen, addTaskDatabase } from '../shared';
+	import { isModalOpen, addTaskDatabase } from '../../shared';
+
 	let newTask = $state({
 		title: '',
 		time: '',
@@ -41,10 +42,10 @@
 	<div class="modal">
 		<form class="modal-content" onsubmit={handleSubmit}>
 			<label for="title">Title</label>
-			<input type="text" bind:value={newTask.title} id="title" />
+			<input type="text" bind:value={newTask.title} id="title" placeholder="walking the dog" />
 
 			<label for="task">Time</label>
-			<input type="text" bind:value={newTask.time} id="time" />
+			<input type="text" bind:value={newTask.time} id="time" placeholder="00:00 (hours:minutes)" />
 
 			<label for="date">Date</label>
 			<input type="Date" bind:value={newTask.date} id="date" />
