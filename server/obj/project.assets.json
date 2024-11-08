@@ -269,6 +269,22 @@
         "build": {
           "buildTransitive/net6.0/_._": {}
         }
+      },
+      "Npgsql/8.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Npgsql.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Npgsql.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
@@ -699,12 +715,36 @@
         "microsoft.extensions.primitives.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Npgsql/8.0.5": {
+      "sha512": "zRG5V8cyeZLpzJlKzFKjEwkRMYIYnHWJvEor2lWXeccS2E1G2nIWYYhnukB51iz5XsWSVEtqg3AxTWM0QJ6vfg==",
+      "type": "package",
+      "path": "npgsql/8.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net6.0/Npgsql.dll",
+        "lib/net6.0/Npgsql.xml",
+        "lib/net7.0/Npgsql.dll",
+        "lib/net7.0/Npgsql.xml",
+        "lib/net8.0/Npgsql.dll",
+        "lib/net8.0/Npgsql.xml",
+        "lib/netstandard2.0/Npgsql.dll",
+        "lib/netstandard2.0/Npgsql.xml",
+        "lib/netstandard2.1/Npgsql.dll",
+        "lib/netstandard2.1/Npgsql.xml",
+        "npgsql.8.0.5.nupkg.sha512",
+        "npgsql.nuspec",
+        "postgresql.png"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 8.0.10",
-      "Microsoft.EntityFrameworkCore.InMemory >= 8.0.10"
+      "Microsoft.EntityFrameworkCore.InMemory >= 8.0.10",
+      "Npgsql >= 8.0.5"
     ]
   },
   "packageFolders": {
@@ -756,6 +796,10 @@
           "Microsoft.EntityFrameworkCore.InMemory": {
             "target": "Package",
             "version": "[8.0.10, )"
+          },
+          "Npgsql": {
+            "target": "Package",
+            "version": "[8.0.5, )"
           }
         },
         "imports": [

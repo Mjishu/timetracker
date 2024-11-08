@@ -10,6 +10,7 @@
 	import Chart from '../components/tasks/chart.svelte';
 	import { removeTask } from '../helper/shared';
 
+	//periods
 	let currentPeriod = $state({ period: 'week', functionToCall: timeHelper.isWeek });
 	let allTasks = $state<taskType.TaskInformation[] | undefined>(undefined); //sort this based on current period before sending it to showtasks
 	let filteredTasks = $state<taskType.TaskInformation[] | undefined>(undefined);
