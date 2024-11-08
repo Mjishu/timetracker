@@ -1,5 +1,5 @@
 <script>
-	import { isModalOpen, addTaskDatabase } from '../../shared';
+	import { isModalOpen, addTaskDatabase } from '../../helper/shared';
 
 	let newTask = $state({
 		title: '',

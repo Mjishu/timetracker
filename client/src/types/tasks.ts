@@ -1,5 +1,6 @@
 
 export type TaskInformation = {
+    id: number;
     title: string;
     time: string;
     date: string;
