@@ -12,11 +12,15 @@
 
 	let currentPeriod = $state({ period: 'week', functionToCall: timeHelper.isWeek });
 	let allTasks = $state<taskType.TaskInformation[] | undefined>(undefined); //sort this based on current period before sending it to showtasks
+	let filteredTasks = $state<taskType.TaskInformation[] | undefined>(undefined);
 
 	onMount(async () => {
 		fetch('/api/tasks/all')
 			.then((res) => res.json())
-			.then((data) => (allTasks = data)) //set tasks to this
+			.then((data) => {
+				allTasks = data;
+				updateFilteredTasks();
+			}) //set tasks to this
 			.catch((err) => console.error(`There was an error trying to get tasks. ${err}`));
 	});
 
@@ -44,6 +48,13 @@
 			currentPeriod.period = period;
 			currentPeriod.functionToCall = timeHelper.isYear;
 		}
+		updateFilteredTasks();
+	}
+
+	function updateFilteredTasks() {
+		filteredTasks = allTasks?.filter((task) =>
+			currentPeriod.functionToCall(new Date(), parseISO(task.date))
+		);
 	}
 </script>
 
@@ -55,21 +66,21 @@
 </div>
 <AddTask />
 
-{#if allTasks != undefined && allTasks.length > 0}
+{#if filteredTasks && filteredTasks.length > 0}
 	<div class="task-holder">
-		{#each allTasks as task}
-			{#if currentPeriod.functionToCall(new Date(), parseISO(task.date))}
-				<div class="task-information">
-					<h3>{task.title}</h3>
-					<p>{task.time}</p>
-					<p>{task.date}</p>
-					<p>{task.type}</p>
-				</div>
-				<button onclick={() => removeTask(task.id)} class="delete-task">delete</button>
-			{/if}
+		{#each filteredTasks as task}
+			<div class="task-information">
+				<h3>{task.title}</h3>
+				<p>{task.time}</p>
+				<p>{task.date}</p>
+				<p>{task.type}</p>
+			</div>
+			<button onclick={() => task.id !== undefined && removeTask(task.id)} class="delete-task"
+				>delete</button
+			>
 		{/each}
 	</div>
-	<Chart taskData={allTasks} />
+	<Chart {filteredTasks} />
 {/if}
 
 <style>

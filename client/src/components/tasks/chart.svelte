@@ -3,7 +3,8 @@
 	import { Chart, type ChartConfiguration, registerables } from 'chart.js';
 	import * as types from '../../types/tasks';
 
-	export let taskData: types.TaskInformation[];
+	let { filteredTasks }: { filteredTasks: types.TaskInformation[] } = $props();
+	console.log(`the filtered tasks are `, filteredTasks);
 	let chartType = 'pie';
 
 	Chart.register(...registerables);
@@ -20,7 +21,7 @@
 		return hours * 60 + minutes;
 	}
 
-	const aggregatedData = taskData.reduce<types.AggregatedTime>(
+	const aggregatedData = filteredTasks.reduce<types.AggregatedTime>(
 		(acc: { [x: string]: number }, item: types.TaskInformation) => {
 			const type = item.type;
 			const timeInMinutes = timeToMinutes(item.time);

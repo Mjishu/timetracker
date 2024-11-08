@@ -22,14 +22,11 @@ export async function addTaskDatabase(details: types.TaskInformation) {
 
 export async function removeTask(id: number) {
     try {
-
-        const response = await fetch(`/api/task/delete/${id}`)
+        const response = await fetch(`/api/tasks/delete/${id}`, { method: "DELETE" })
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-
-        const json = await response.json();
-        console.log(json)
+        await response.json();
     } catch (error) {
         console.error(error)
     }

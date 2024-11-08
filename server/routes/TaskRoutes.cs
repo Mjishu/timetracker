@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 public static class TaskRoutes
 {
-    public static void MapTaskRoutes(this IEndpointRouteBuilder routes)
+    public static async void MapTaskRoutes(this IEndpointRouteBuilder routes)
     {
         var taskRoutes = routes.MapGroup("/tasks");
 
@@ -29,6 +29,17 @@ public static class TaskRoutes
 
                 return Results.Created($"/tasks/{task.Id}", task);
             });
+
+        taskRoutes.MapDelete("/delete/{id}", async (int id, TasksDb db) =>
+        {
+            if (await db.Tasks.FindAsync(id) is Task task)
+            {
+                db.Tasks.Remove(task);
+                await db.SaveChangesAsync();
+                return Results.NoContent();
+            }
+            return Results.NoContent();
+        });
 
     }
 }
