@@ -14,9 +14,9 @@ type Task struct {
 	Date     string `json:"date"`
 }
 
-var Tasks = []Task{
-	Task{Id: "1", Title: "walking the dog", Time: "01:00", TaskType: "exercise", Date: "2024/11/15"},
-	Task{Id: "2", Title: "coding this app", Time: "01:30", TaskType: "coding", Date: "2024/11/16"},
+var Tasks = []Task{ //! when making POST of a new Task it should auto put it in the iso format from a given calender date
+	Task{Id: "1", Title: "walking the dog", Time: "01:00", TaskType: "exercise", Date: "2024-11-15T21:00:00"},
+	Task{Id: "2", Title: "coding this app", Time: "01:30", TaskType: "coding", Date: "2024-11-16T21:00:00"},
 }
 
 func handleRequests() {
@@ -37,6 +37,7 @@ func postTasks(c *gin.Context) {
 	var newTask Task
 
 	if err := c.BindJSON(&newTask); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
 	}
 

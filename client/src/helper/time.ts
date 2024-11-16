@@ -10,7 +10,9 @@ export function isDay(now: Date, taskDate: Date): boolean { // this one isn't ge
 
 export function isWeek(now: Date, taskDate: Date): boolean {
     console.log("week was called")
-    return isSameWeek(now, taskDate)
+    const sameWeek = isSameWeek(now, taskDate)
+    console.log(`is same week? ${sameWeek}`)
+    return sameWeek
 }
 
 export function isMonth(now: Date, taskDate: Date): boolean {

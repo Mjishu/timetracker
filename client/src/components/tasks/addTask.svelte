@@ -2,6 +2,7 @@
 	import { isModalOpen, addTaskDatabase } from '../../helper/shared';
 
 	let newTask = $state({
+		id: '2',
 		title: '',
 		time: '',
 		date: '',

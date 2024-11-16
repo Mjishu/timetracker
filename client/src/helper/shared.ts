@@ -12,7 +12,7 @@ export async function addTaskDatabase(details: types.TaskInformation) {
             body: JSON.stringify(details)
         }
 
-        const response = await fetch("/api/tasks/new", fetchParams)
+        const response = await fetch("/api/tasks", fetchParams)
         const json = response.json();
         console.log(json);
     } catch (error) {
@@ -22,7 +22,7 @@ export async function addTaskDatabase(details: types.TaskInformation) {
 
 export async function removeTask(id: number) {
     try {
-        const response = await fetch(`/api/tasks/delete/${id}`, { method: "DELETE" })
+        const response = await fetch(`/api/tasks/${id}`, { method: "DELETE" })
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
