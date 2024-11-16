@@ -1,13 +1,23 @@
 <script lang="ts">
 	const information = $state({ username: '', password: '' });
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
-		console.log($state.snapshot(information));
+		try {
+			const response = await fetch(`/api/users/${information.username}`);
+			if (!response.ok) {
+				throw new Error(`http error, status: ${response.status}`);
+			}
+			const data = await response.json();
+
+			console.log(data);
+		} catch (err) {
+			console.error(`error fetching data: ${err}`);
+		}
 	}
 </script>
 
-<h2>Log In!</h2>
+<h2>Log In</h2>
 <form onsubmit={handleSubmit}>
 	<div class="authentication-div">
 		<label for="username">Username</label>

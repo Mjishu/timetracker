@@ -3,22 +3,28 @@
 
 	async function handleSubmit(e) {
 		e.preventDefault();
+		try {
+			const fetchParams = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(information)
+			};
 
-		const fetchParams = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(information)
-		};
+			const response = await fetch('/api/users', fetchParams);
 
-		const response = await fetch('/api/users', fetchParams);
-		const data = response.json();
-		console.log('Data recieved is ', data);
+			if (!response.ok) {
+				throw new Error(`HTTP error; status: ${response.status}`);
+			}
 
-		console.log($state.snapshot(information));
+			const data = response.json();
+			console.log('Data recieved is ', data);
+		} catch (err) {
+			console.error(`error fetching data: ${err}`);
+		}
 	}
 </script>
 
-<h2>Log In!</h2>
+<h2>Sign Up</h2>
 <form onsubmit={handleSubmit}>
 	<div class="authentication-div">
 		<label for="username">Username</label>

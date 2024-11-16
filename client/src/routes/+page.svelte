@@ -16,14 +16,15 @@
 	let filteredTasks = $state<taskType.TaskInformation[] | undefined>(undefined);
 
 	onMount(async () => {
-		fetch('/api/tasks')
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				allTasks = data;
-				updateFilteredTasks();
-			}) //set tasks to this
-			.catch((err) => console.error(`There was an error trying to get tasks. ${err}`));
+		try {
+			const response = await fetch('/api/tasks');
+			const data = await response.json();
+			console.log(data);
+			allTasks = data;
+			updateFilteredTasks();
+		} catch (err) {
+			console.error(`There was an error trying to get tasks. ${err}`);
+		}
 	});
 
 	function handleOpenModal() {
@@ -54,7 +55,6 @@
 	}
 
 	function updateFilteredTasks() {
-		// issue with filteredtasks.length
 		filteredTasks = allTasks?.filter((task) =>
 			currentPeriod.functionToCall(new Date(), parseISO(task.date))
 		);
@@ -70,7 +70,6 @@
 <AddTask />
 
 {#if filteredTasks && filteredTasks.length > 0}
-	<h1>Hello</h1>
 	<div class="task-holder">
 		{#each filteredTasks as task}
 			<div class="task-information">
