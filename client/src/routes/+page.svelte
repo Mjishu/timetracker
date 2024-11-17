@@ -3,7 +3,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { parse, parseISO } from 'date-fns';
-	import { isModalOpen } from '../helper/shared';
+	import { isModalOpen, getAllTasks } from '../helper/shared';
 	import * as timeHelper from '../helper/time';
 	import * as taskType from '../types/tasks';
 	import AddTask from '../components/tasks/addTask.svelte';
@@ -16,15 +16,10 @@
 	let filteredTasks = $state<taskType.TaskInformation[] | undefined>(undefined);
 
 	onMount(async () => {
-		try {
-			const response = await fetch('/api/tasks');
-			const data = await response.json();
-			console.log(data);
-			allTasks = data;
-			updateFilteredTasks();
-		} catch (err) {
-			console.error(`There was an error trying to get tasks. ${err}`);
-		}
+		//might not be the way, probably need to do $state(getalltasks) outsided
+		const data = await getAllTasks();
+		allTasks = data;
+		updateFilteredTasks();
 	});
 
 	function handleOpenModal() {

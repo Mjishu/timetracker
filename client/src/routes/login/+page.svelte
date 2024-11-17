@@ -4,7 +4,13 @@
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
-			const response = await fetch(`/api/users/${information.username}`);
+			const fetchParams = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(information)
+			};
+
+			const response = await fetch(`/api/users/login`, fetchParams);
 			if (!response.ok) {
 				throw new Error(`http error, status: ${response.status}`);
 			}

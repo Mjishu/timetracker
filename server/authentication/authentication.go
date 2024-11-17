@@ -1,6 +1,7 @@
 package authentication
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -24,7 +25,7 @@ var users = []SignupInfo{
 
 func AuthenticationRequests(router *gin.Engine) {
 	router.GET("/users", getAllUsers)
-	router.GET("/users/:name", getUser)
+	router.GET("/users/login", loginUser)
 	router.POST("/users", postUser)
 	router.DELETE("/users/:name", deleteUser)
 }
@@ -67,4 +68,9 @@ func deleteUser(c *gin.Context) {
 		}
 	}
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "user not found", "success": false})
+}
+
+func loginUser(c *gin.Context) {
+	var user LoginInfo
+	fmt.Printf("the user request value %v", user)
 }

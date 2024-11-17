@@ -32,3 +32,16 @@ export async function removeTask(id: number) {
     }
 }
 
+
+export async function getAllTasks() {
+    try {
+        const response = await fetch('/api/tasks');
+        const data = await response.json();
+        console.log(data);
+        return new Promise((fulfil) => {
+            fulfil(data)
+        })
+    } catch (err) {
+        console.error(`There was an error trying to get tasks. ${err}`);
+    }
+}
