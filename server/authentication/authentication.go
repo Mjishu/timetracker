@@ -28,6 +28,7 @@ var users = []SignupInfo{
 func AuthenticationRequests(router *gin.Engine) {
 	router.GET("/users", getAllUsers)
 	router.POST("/users/login", loginUser)
+	router.POST("/users/logout", logoutUser)
 	router.POST("/users", postUser)
 	router.DELETE("/users/:name", deleteUser)
 }
@@ -99,4 +100,10 @@ func loginUser(c *gin.Context) {
 			c.IndentedJSON(http.StatusUnauthorized, "invalid credentials")
 		}
 	}
+}
+
+func logoutUser(c *gin.Context) {
+	// more logic for actual logout this is just boilerplate
+	c.SetCookie("token", "", -1, "/", "localhost", false, true)
+	fmt.Println("Logging you out!")
 }
