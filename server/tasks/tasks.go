@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	auth "github.com/mjishu/timetracker/authentication"
 )
 
 type Task struct {
@@ -19,11 +20,11 @@ var Tasks = []Task{ //! when making POST of a new Task it should auto put it in 
 	{Id: "2", Title: "coding this app", Time: "01:30", TaskType: "coding", Date: "2024-11-16T21:00:00"},
 }
 
-func HandleTaskRequests(router *gin.Engine) {
-	router.GET("/tasks", getTasks)
-	router.GET("/tasks/:id", getSpecificTask)
-	router.POST("/tasks", postTasks)
-	router.DELETE("/tasks/:id", deleteTaskById)
+func HandleTaskRequests(router *gin.Engine) { // middeware verificatio nadded
+	router.GET("/tasks", auth.AuthenticateMiddleware, getTasks)
+	router.GET("/tasks/:id", auth.AuthenticateMiddleware, getSpecificTask)
+	router.POST("/tasks", auth.AuthenticateMiddleware, postTasks)
+	router.DELETE("/tasks/:id", auth.AuthenticateMiddleware, deleteTaskById)
 }
 
 func getTasks(c *gin.Context) {

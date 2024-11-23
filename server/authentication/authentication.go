@@ -1,7 +1,9 @@
 package authentication
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 
@@ -9,8 +11,8 @@ import (
 )
 
 type LoginInfo struct {
-	Password string `json:"password"`
 	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 type SignupInfo struct {
@@ -25,7 +27,7 @@ var users = []SignupInfo{
 
 func AuthenticationRequests(router *gin.Engine) {
 	router.GET("/users", getAllUsers)
-	router.GET("/users/login", loginUser)
+	router.POST("/users/login", loginUser)
 	router.POST("/users", postUser)
 	router.DELETE("/users/:name", deleteUser)
 }
@@ -71,6 +73,30 @@ func deleteUser(c *gin.Context) {
 }
 
 func loginUser(c *gin.Context) {
+	reqData, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "unable to call login user", "success": false})
+	}
+
 	var user LoginInfo
-	fmt.Printf("the user request value %v", user)
+	err = json.Unmarshal(reqData, &user)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "invalid json data", "success": false})
+	}
+
+	for _, u := range users {
+		if strings.EqualFold(u.Username, user.Username) && strings.EqualFold(u.Password, user.Password) {
+			fmt.Println("usernames are equal and so are passowords!")
+			tokenString, err := createToken(user.Username)
+			if err != nil {
+				c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": "Error creating token", "success": false})
+				return
+			}
+			// loggedInUser = user.Username
+			fmt.Printf("Token created: %s\n", tokenString)
+			c.SetCookie("token", tokenString, 3600, "/", "localhost", false, true) //! might not work because this is for only golang, not with go backedn adn js frontend
+		} else {
+			c.IndentedJSON(http.StatusUnauthorized, "invalid credentials")
+		}
+	}
 }
